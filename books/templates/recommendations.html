@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Recommendations</title>
+  </head>
+  <body>
+    <h2>User Recommendations:</h2>
+    <ul>
+      {% for recommendation in recommendations %}
+      <li>
+        <h2>{{ recommendation.title }}</h2>
+        <p>{{ recommendation.author }}</p>
+        <p>{{ recommendation.published_date }}</p>
+        <p>{{ recommendation.description }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

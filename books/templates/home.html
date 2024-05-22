@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Books API</title>
+  </head>
+  <body>
+    <a href="{% url 'show_recommendations' %}">User Recommendations</a>
+    <h1>Google Books Search</h1>
+    <form method="get" action="">
+      <input type="text" name="q" placeholder="Search for books" />
+      <button type="submit">Search</button>
+    </form>
+    <h2>Google Books Results:</h2>
+    <ul>
+      {% for book in books %}
+      <li>
+        <h2>{{ book.volumeInfo.title }}</h2>
+        <p>{{ book.volumeInfo.authors|join:", " }}</p>
+        <p>{{ book.volumeInfo.description }}</p>
+        <img
+          src="{{ book.volumeInfo.imageLinks.thumbnail }}"
+          alt="No Image Available"
+        />
+        <form method="post" action="{% url 'add_recommendation' %}">
+          {% csrf_token %}
+          <input type="hidden" name="book_id" value="{{ book.id }}" />
+          <button type="submit">Add to Recommendations</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
